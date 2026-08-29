@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#201711" />
+    <title>My World — Aymane Igmiden</title>
+    <meta name="description" content="Step inside Aymane Igmiden's interactive 2D world—a playful representation of his apartment, interests, and imagination."> 
+    <script type="module" crossorigin src="/myspace/assets/index-Cxx8DkP4.js"></script>
+  </head>
+  <body>
+    <style>
+      @font-face {
+        font-family: monogram;
+        src: url("./monogram.ttf") format("truetype");
+      }
+
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+      }
+
+      body {
+        font-family: monogram, monospace;
+        font-size: 2rem;
+        overflow: hidden;
+        background: #211c24;
+      }
+
+      #app {
+        width: 100%;
+        height: 100%;
+        min-height: 100%;
+        position: relative;
+      }
+
+      .world-intro { position: fixed; inset: 0; z-index: 20; display: grid; place-items: center; padding: 1.5rem; background: rgba(23, 16, 12, 0.88); backdrop-filter: blur(12px); transition: opacity 300ms ease, visibility 300ms ease; }
+      .world-intro.is-hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+      .intro-card { width: min(620px, 100%); padding: clamp(1.5rem, 5vw, 3rem); color: #f5ebe0; background: rgba(48, 40, 34, 0.96); border: 1px solid rgba(218, 174, 126, 0.45); border-radius: 14px; box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5); text-align: center; }
+      .intro-label { margin: 0 0 .75rem; color: #d6aa7b; font-size: 1.25rem; letter-spacing: .12em; text-transform: uppercase; }
+      .intro-card h1 { margin: 0; font-size: clamp(3rem, 10vw, 5.5rem); font-weight: 400; line-height: .9; }
+      .intro-copy { max-width: 520px; margin: 1.5rem auto; color: #dbcabb; font-size: clamp(1.35rem, 4vw, 1.8rem); line-height: 1.25; }
+      .enter-world { border: 1px solid #e1b583; border-radius: 8px; padding: .8rem 1.4rem; color: #251a13; background: #e1b583; font: inherit; font-size: 1.4rem; cursor: pointer; }
+      .enter-world:hover { background: #f0c99f; }
+      .intro-hint { margin: 1rem 0 0; color: #9f8875; font-size: 1rem; }
+      .back-home { position: fixed; top: 1rem; right: 1rem; z-index: 12; padding: .5rem .8rem; border: 1px solid rgba(218,174,126,.4); border-radius: 7px; color: #f3dfcc; background: rgba(36,28,22,.88); font-size: 1.15rem; text-decoration: none; backdrop-filter: blur(8px); }
+      .back-home:hover { background: rgba(62,47,37,.96); }
+      .tour-panel { position: fixed; top: 1rem; left: 1rem; z-index: 11; width: min(260px, calc(100vw - 2rem)); padding: .7rem .85rem; border: 1px solid rgba(218,174,126,.35); border-radius: 8px; color: #f3dfcc; background: rgba(36,28,22,.88); box-shadow: 0 8px 24px rgba(0,0,0,.3); backdrop-filter: blur(8px); }
+      .tour-panel p { margin: 0; font-size: 1.1rem; line-height: 1; }.tour-panel span { color: #d6aa7b; }.tour-controls { display:block; margin-top:.55rem; color:#a99482!important; font-size:.85rem; line-height:1.2; }.tour-track { height: 4px; margin-top: .55rem; overflow: hidden; border-radius: 10px; background: rgba(255,255,255,.12); }.tour-track i { display: block; width: 0; height: 100%; background: #e1b583; transition: width 250ms ease; }
+      .interaction-prompt { position: fixed; left: 50%; bottom: 1.5rem; z-index: 10; transform: translate(-50%, 14px); padding: .55rem .85rem; border: 1px solid rgba(225,181,131,.55); border-radius: 8px; color: #f5ebe0; background: rgba(36,28,22,.94); box-shadow: 0 8px 28px rgba(0,0,0,.4); font-size: 1.15rem; opacity: 0; pointer-events: none; transition: opacity 180ms ease, transform 180ms ease; white-space: nowrap; }.interaction-prompt.is-visible { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; cursor: pointer; }.interaction-prompt kbd { padding: .1rem .35rem; border: 1px solid rgba(255,255,255,.28); border-radius: 4px; color: #251a13; background: #e1b583; font: inherit; }
+      .dialogue-title { margin: 0 0 .45rem; color: #d6aa7b; font-size: 1.25rem; letter-spacing: .08em; text-transform: uppercase; }
+
+      #textbox {
+        position: absolute;
+        left: 10%;
+        right: 10%;
+        bottom: 2vh;
+        min-height: 10vh;
+        background: rgba(48, 40, 34, 0.94);
+        color: #f5ebe0;
+        border-radius: 8px;
+        border: 1px solid rgba(180, 140, 100, 0.55);
+        box-shadow:
+          0 4px 24px rgba(0, 0, 0, 0.35),
+          inset 0 1px 0 rgba(255, 255, 255, 0.06);
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: flex-start;
+        word-spacing: 0.2rem;
+        backdrop-filter: blur(8px);
+      }
+
+      .ui-text {
+        margin: 0;
+        user-select: none;
+      }
+
+      .ui-close-btn {
+        font-family: monogram, monospace;
+        border: 1px solid rgba(140, 100, 70, 0.7);
+        background: rgba(72, 58, 48, 0.95);
+        color: #f0dcc8;
+        border-radius: 6px;
+        padding: 1rem;
+        font-size: inherit;
+        cursor: pointer;
+      }
+
+      .ui-close-btn:hover {
+        background: rgba(90, 72, 58, 0.98);
+        box-shadow: 0 0 0 1px rgba(200, 160, 120, 0.25);
+      }
+
+      .btn-container {
+        align-self: flex-end;
+        margin-top: 1rem;
+      }
+
+      .note,
+      .music-note {
+        position: absolute;
+        left: 5%;
+        z-index: 2;
+        width: fit-content;
+        max-width: 90%;
+        padding: 0.35rem 0.85rem;
+        border-radius: 8px;
+        background: rgba(36, 28, 22, 0.92);
+        border: 1px solid rgba(200, 160, 120, 0.35);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+      }
+      .note, .music-note { display: none; }
+
+      .note {
+        top: 1vh;
+        color: #f5ebe0;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+      }
+
+      .music-note {
+        top: 6vh;
+        color: #edd9c8;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+      }
+    </style>
+    <div class="world-intro" id="world-intro">
+      <div class="intro-card">
+        <p class="intro-label">A small interactive story</p>
+        <h1>My World</h1>
+        <p class="intro-copy">A 2D representation of my apartment—and the ideas, interests, jokes, and everyday things that make it feel like mine.</p>
+        <button class="enter-world" id="enter-world" type="button">Step inside</button>
+        <p class="intro-hint">Move with arrow keys or click · Press M for music</p>
+      </div>
+    </div>
+    <a class="back-home" href="/">← Portfolio</a>
+    <aside class="tour-panel" aria-live="polite"><p>Apartment tour · <span id="tour-progress">0 / 6</span></p><span class="tour-controls">Move: click / arrows · Inspect: E · Music: M</span><div class="tour-track"><i id="tour-bar"></i></div></aside>
+    <div class="interaction-prompt" id="interaction-prompt"><kbd>E</kbd> Inspect <span id="interaction-name">object</span></div>
+    <div id="app">
+      <div>
+        <p class="note">Tap/Click around to move</p>
+        <p class="music-note">Click on M to play music</p>
+
+        <div id="textbox-container" style="display: none">
+          <div id="textbox">
+            <p id="dialogue-title" class="dialogue-title"></p>
+            <p id="dialogue" class="ui-text"></p>
+            <div class="btn-container">
+              <button id="close" class="ui-close-btn">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <canvas id="game"></canvas>
+    </div>
+    <script>
+      document.getElementById('enter-world').addEventListener('click', function () {
+        document.getElementById('world-intro').classList.add('is-hidden');
+        document.getElementById('game').focus();
+      });
+    </script>
+  </body>
+</html>

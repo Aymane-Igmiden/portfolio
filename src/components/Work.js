@@ -53,8 +53,9 @@ export default () => {
             <Col size={12}>
               <TrackVisibility>
                 <div className= "">
-                  <h2>Work & achievements</h2>
-                  <p>This is a simple showcase of my work experiences and achievements</p>
+                  <span className="section-kicker">02 / Experience</span>
+                  <h2>Work with real-world weight.</h2>
+                  <p className="section-intro">Engineering products and platforms across search, fintech, AI enablement, and decentralized technology.</p>
                   <Tab.Container id="projects-tabs" defaultActiveKey="first">
                     <Tab.Content id="slideInUp" className="">
                       <Tab.Pane eventKey="first">
@@ -78,7 +79,6 @@ export default () => {
             </Col>
           </Row>
         </Container>
-        <img className="background-image-right" src={colorSharp2}></img>
       </section>
     </div>
   )

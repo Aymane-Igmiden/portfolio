@@ -1,20 +1,18 @@
 import React from 'react';
-import { Col, Nav } from "react-bootstrap";
+import { Col } from "react-bootstrap";
+import { ArrowUpRight } from 'react-bootstrap-icons';
 
 export const ProjectCard = ({ title, description, imgUrl, link }) => {
   return (
     <Col size={12} sm={6} md={4}>
-      <div className="proj-imgbx">
-        <img src={imgUrl} style={{ width: "100%", height: "auto" }} />
-        <div className="proj-txtx">
-          <h4>{title}</h4>
-          <Nav.Link href={link} target="_blank"  >{description}</Nav.Link>
+      <a className="project-card" href={link} target="_blank" rel="noreferrer">
+        <div className="project-image"><img src={imgUrl} alt="" /></div>
+        <div className="project-card-copy">
+          <span>Selected work</span>
+          <h3>{title}<ArrowUpRight /></h3>
+          <p>{description}</p>
         </div>
-      </div>
-      <div className="proj-imgbx-desc">
-        <p>{description} </p>
-      </div>
+      </a>
     </Col>
   )
 }
-

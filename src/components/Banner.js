@@ -1,44 +1,41 @@
-import React, { useState, useEffect } from 'react';
-import Terminal from 'terminal-in-react';
 import { Container, Row, Col } from "react-bootstrap";
-import 'animate.css';
-
-import headerImg from "../assets/img/header-img.svg";
+import { ArrowUpRight, Download } from 'react-bootstrap-icons';
+import resume from '../assets/pdf/resume.pdf';
 
 export default () => {
-  const current = new Date();
-  const date = `${current.getDate()}-${current.getMonth() + 1}-${current.getFullYear()}`;
-
   return (
     <section className="banner" id="home">
       <Container>
-        <Row className="aligh-items-center">
-          <Col xs={12} md={6} xl={7}>
-            <span className="tagline">{date}</span>
-            <h1>{`Hi! I'm Aymane Igmiden⚡`} </h1>
-            <h4>I'm a Backend engineer with 2 years of experience</h4>
-            <Terminal
-              color='white'
-              backgroundColor='black'
-              barColor='black'
-              style={{ fontWeight: "bold", fontSize: "1em" }}
-              commands={{
-                'linkedin': () => window.open('https://www.linkedin.com/in/aymane-igmiden/', '_blank'),
-                'github': () => window.open('https://github.com/sordgom', '_blank'),
-                'devpost': () => window.open('https://devpost.com/sordgom', '_blank'),
-                'email': () => 'aymaneigmiden@gmail.com',
-              }}
-              descriptions={{
-                'linkedin': 'opens my linkedin profile',
-                'github': 'opens my github profile',
-                'devpost': 'opens my devpost profile',
-                'email': 'shows my email address',
-              }}
-              msg='Welcome, I hope you can find something that catches your attention. enter `help` for more info.'
-            />
+        <Row className="align-items-center hero-grid">
+          <Col xs={12} lg={7}>
+            <div className="availability"><span /> Available for meaningful engineering work</div>
+            <p className="eyebrow">Senior software engineer · AI platforms · Backend systems</p>
+            <h1>I build the <span>infrastructure</span> behind ambitious products.</h1>
+            <p className="hero-copy">I’m Aymane Igmiden, a software engineer focused on AI tooling, developer platforms, and reliable distributed systems.</p>
+            <div className="hero-actions">
+              <a className="primary-action" href="mailto:aymaneigmiden@gmail.com">Let’s talk <ArrowUpRight /></a>
+              <a className="secondary-action" href={resume} target="_blank" rel="noreferrer"><Download /> Résumé</a>
+            </div>
+            <div className="hero-meta">
+              <div><strong>4+</strong><span>Years building</span></div>
+              <div><strong>3</strong><span>Production domains</span></div>
+              <div><strong>2×</strong><span>Hackathon winner</span></div>
+            </div>
           </Col>
-          <Col xs={12} md={6} xl={5}>
-            <img src={headerImg} alt="Header Img" />
+          <Col xs={12} lg={5}>
+            <div className="signal-card" aria-label="Engineering focus">
+              <div className="terminal-bar"><span></span><span></span><span></span><small>aymane@portfolio</small></div>
+              <div className="terminal-body">
+                <p><b>~</b> profile --current</p>
+                <div className="terminal-output">
+                  <span>role</span><strong>Senior Software Engineer</strong>
+                  <span>focus</span><strong>AI platforms & backend</strong>
+                  <span>stack</span><strong>TypeScript · Go · Java · Rust</strong>
+                  <span>location</span><strong>Kuala Lumpur</strong>
+                </div>
+                <p className="terminal-prompt"><b>~</b> <i></i></p>
+              </div>
+            </div>
           </Col>
         </Row>
       </Container>

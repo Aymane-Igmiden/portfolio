@@ -62,8 +62,9 @@ export default () => {
             <Col size={12}>
               <TrackVisibility>
                 <div className= "">
-                  <h2>Projects</h2>
-                  <p>This is a simple showcase of my projects and achievements</p>
+                  <span className="section-kicker">01 / Selected projects</span>
+                  <h2>Things I’ve shipped.</h2>
+                  <p className="section-intro">A selection of products and experiments across backend systems, fintech, web3, and data.</p>
                   <Tab.Container id="projects-tabs" defaultActiveKey="first">
                     {/* <Nav variant="pills" className="nav-pills mb-5 justify-content-center align-items-center" id="pills-tab">
                       <Nav.Item>
@@ -115,7 +116,6 @@ export default () => {
             </Col>
           </Row>
         </Container>
-        <img className="background-image-right" src={colorSharp2}></img>
       </section>
     </div>
   )

@@ -1,10 +1,11 @@
 import { Suspense, lazy, useState } from 'react';
 import { Container, Row, Col } from "react-bootstrap";
-import { ArrowRightCircle, Quote } from 'react-bootstrap-icons';
+import { ArrowUpRight } from 'react-bootstrap-icons';
 import { Oval } from 'react-loader-spinner'
 import TrackVisibility from 'react-on-screen';
 
 import headerImg from "../assets/img/2.png";
+import resume from "../assets/pdf/resume.pdf";
 import 'animate.css';
 const LazyEmbedCredlyBadge = lazy(() => import('./Credly'));
 
@@ -26,24 +27,32 @@ export default () => {
           <Row>
             <Col size={12}>
               <TrackVisibility>
-                <h2>Who am I?</h2>
-                <p>
-                  My name is Aymane Igmiden. I am a Software Engineer with 2 years of experience.
-                </p>
-                <p>
-                  The prospect of expanding my work experience and taking on new challenges excites me. And, I'm looking forward to hearing from you.
-                </p>
-                <h2>Skills</h2>
-                <p>JavaScript, TypeScript, Rust, Java, SQL, Golang, Solidity</p>
-                <p>React, Angular, Express, Node.js, MySQL, PostgreSQL, RESTful API</p>
-                <p>Git, Docker, GCP, VS Code, Docker, Kubernetes, GitHub Actions, Kafka</p>
-                <p>English, French, Arabic, Tamazight, German</p>
-
-                <h2>Education</h2>
-                <p>Bachelor's Degree in Computer Science</p>
-
-
-                <h2>Certifications</h2>
+                <span className="section-kicker">03 / About</span>
+                <h2>Engineering with range—and intent.</h2>
+                <div className="about-lead">
+                  <p>I’m Aymane, a senior software engineer specialising in AI tooling platforms, catalog architecture, and backend systems for products used at scale.</p>
+                  <p>I care about foundations: the platform decisions, interfaces, and developer workflows that let teams move quickly without creating chaos.</p>
+                </div>
+                <div className="profile-grid">
+                  <div className="profile-panel">
+                    <span>Core stack</span>
+                    <p>Java · TypeScript · JavaScript · Go · Rust · Python</p>
+                  </div>
+                  <div className="profile-panel">
+                    <span>Cloud & systems</span>
+                    <p>AWS · Docker · Kubernetes · CI/CD · Kafka · Redis</p>
+                  </div>
+                  <div className="profile-panel">
+                    <span>Education</span>
+                    <p>BSc Computer Science, University Putra Malaysia</p>
+                  </div>
+                  <div className="profile-panel">
+                    <span>Certifications</span>
+                    <p>AWS Solutions Architect · AWS Developer</p>
+                  </div>
+                </div>
+                <div className="credly-wrap">
+                <h3>Verified credentials</h3>
                 <Suspense fallback={
                   <Oval
                     visible={true}
@@ -57,15 +66,11 @@ export default () => {
                 }>
                   <LazyEmbedCredlyBadge />
                 </Suspense>
-
-                <h2>Contact Information</h2>
-                <ul>
-                  <li><ArrowRightCircle /> <span>Email:</span> aymaneigmiden@gmail.com </li>
-                  <li><ArrowRightCircle /> <span >Resume:</span> <a href='https://docs.google.com/document/d/1ZZ6itkQhcH-j22W4Ak4MzFRPPbAq7Kr4kU21sTEkKb8/edit?usp=sharing' target="_blank">Google Docs Document</a> </li>
-                  <li><ArrowRightCircle /> <span >LinkedIn:</span> <a href='https://www.linkedin.com/in/aymane-igmiden/' target="_blank">https://www.linkedin.com/in/aymane-igmiden/</a> </li>
-                  <li><ArrowRightCircle /> <span >Github:</span> <a href='https://github.com/sordgom' target="_blank" >https://github.com/sordgom </a> </li>
-                  <li><ArrowRightCircle /> <span >Devpost:</span> <a href='https://devpost.com/sordgom' target="_blank"> https://devpost.com/sordgom </a></li>
-                </ul>
+                </div>
+                <div className="contact-strip">
+                  <div><span>Want to build something substantial?</span><h3>Let’s make it happen.</h3></div>
+                  <a href="mailto:aymaneigmiden@gmail.com">Start a conversation <ArrowUpRight /></a>
+                </div>
               </TrackVisibility>
             </Col>
             <Col xs={12} md={6} xl={5}>

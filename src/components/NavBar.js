@@ -3,7 +3,6 @@ import { Navbar, Nav, Container } from "react-bootstrap";
 
 import navIcon2 from '../assets/img/github.svg';
 import navIcon3 from '../assets/img/discord.svg';
-import headerImg from "../assets/img/header-img.svg";
 import { useAtom } from 'jotai';
 import { activeLinkAtom } from '../atoms/activeLink.atom';
 
@@ -31,18 +30,17 @@ export default () => {
   return (
       <Navbar expand="md" className={scrolled ? "scrolled" : ""}>
         <Container>
-          <Navbar.Brand href="/">
-          <img src={headerImg} alt="Header Img"/> 
-          </Navbar.Brand>
+          <Navbar.Brand href="/" aria-label="Aymane Igmiden home"><span>AI</span><small>/ engineer</small></Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav">
             <span className="navbar-toggler-icon"></span>
           </Navbar.Toggle>
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
               <Nav.Link className={activeLink === 'home' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('home')}>Home</Nav.Link>
-              <Nav.Link className={activeLink === 'work' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('work')}>Work & achievements</Nav.Link>
+              <Nav.Link className={activeLink === 'work' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('work')}>Experience</Nav.Link>
               <Nav.Link className={activeLink === 'projects' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('projects')}>Projects</Nav.Link>
-              <Nav.Link className={activeLink === 'profile' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('profile')}>About me</Nav.Link>
+              <Nav.Link className={activeLink === 'profile' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('profile')}>About</Nav.Link>
+              <Nav.Link className="navbar-link world-link" href="/myspace/">Enter My World <span aria-hidden="true">↗</span></Nav.Link>
               {/* <Nav.Link className={activeLink === 'resume' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('resume')}>Resume</Nav.Link> */}
             </Nav>
             <span className="navbar-text">
