@@ -1,9 +1,7 @@
 import 'animate.css';
 import { Suspense, lazy } from "react";
-import { useAtom } from 'jotai';
 import { Oval } from 'react-loader-spinner'
 
-import { activeLinkAtom } from '../atoms/activeLink.atom';
 import NavBar from './NavBar';
 import Footer from './Footer';
 
@@ -13,8 +11,6 @@ const LazyWork = lazy(() => import('./Work'));
 const LazyBanner = lazy(() => import('./Banner'));
 
 export const Home = () => {
-    const [activeLink] = useAtom(activeLinkAtom);
-
     return (
         <div className="main">
             <NavBar />
@@ -29,11 +25,10 @@ export const Home = () => {
                     wrapperClass="spinner"
                 />
             }>
-                {activeLink === "home" && <LazyBanner />}
-                {activeLink === "projects" && <LazyProjects />}
-                {activeLink === "work" && <LazyWork />}
-                {/* {activeLink === "resume" && <Resume/>} */}
-                {activeLink === "profile" && <LazyProfile />}
+                <LazyBanner />
+                <LazyWork />
+                <LazyProjects />
+                <LazyProfile />
             </Suspense>
             <Footer />
         </div>
