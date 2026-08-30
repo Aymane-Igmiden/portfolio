@@ -33,3 +33,11 @@ jobs:
 
       - name: Build
         run: pnpm build
+
+      - name: Trigger Vercel production deployment
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        env:
+          VERCEL_DEPLOY_HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}
+        run: |
+          test -n "$VERCEL_DEPLOY_HOOK"
+          curl --fail --show-error --silent --request POST "$VERCEL_DEPLOY_HOOK"
